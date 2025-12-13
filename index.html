@@ -685,12 +685,12 @@
         <p class="text-base font-cute opacity-60">INFP Thought Garden © 2024</p>
     </footer>
 
-    <!-- ★★★ 파이어베이스 연동 스크립트 ★★★ -->
+    <!-- 파이어베이스 연동 스크립트
     <script type="module">
         // 1. 파이어베이스 라이브러리
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } 
-            from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+            from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // 2. 파이어베이스 설정값
         const firebaseConfig = {
@@ -734,9 +734,15 @@
         const messageList = document.getElementById('messageList');
         const q = query(collection(db, "guestbook"), orderBy("date", "desc"));
 
+        // 데이터 읽기 시도 (에러 발생 시 경고창 띄움)
         onSnapshot(q, (snapshot) => {
             messageList.innerHTML = "";
             const colors = ['bg-yellow-100', 'bg-pink-100', 'bg-blue-100', 'bg-green-100']; 
+
+            if (snapshot.empty) {
+                 messageList.innerHTML = `<div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">아직 남겨진 메시지가 없어요. 첫 번째 주인공이 되어주세요! <i class="fas fa-sparkles text-yellow-400"></i></div>`;
+                 return;
+            }
 
             snapshot.forEach((doc) => {
                 const data = doc.data();
@@ -761,6 +767,9 @@
                 `;
                 messageList.innerHTML += card;
             });
+        }, (error) => {
+            console.error("Read error:", error);
+            alert("데이터를 불러오지 못했어요! 😭 파이어베이스 규칙(Rules)이 'true'로 설정되어 있는지 꼭 확인해주세요.");
         });
     </script>
 </body>
