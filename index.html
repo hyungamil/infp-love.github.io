@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인프피빵장님의 생각 정원</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 폰트 및 아이콘 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- 귀여운 폰트 추가 (Jua: 제목용, Nanum Pen Script: 손글씨용) -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -25,14 +23,13 @@
                             light: '#E9D5FF', 
                             main: '#d8b4fe',  
                             dark: '#9333EA',  
-                            bg: '#FDF4FF',    // 더 핑크빛 도는 배경
+                            bg: '#FDF4FF',
                         }
                     },
                     animation: {
                         'float': 'float 3s ease-in-out infinite',
-                        'float-slow': 'float 6s ease-in-out infinite',
-                        'float-fast': 'float 2s ease-in-out infinite',
                         'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'heart-beat': 'heartBeat 0.3s ease-in-out',
                     },
                     keyframes: {
                         float: {
@@ -42,6 +39,11 @@
                         wiggle: {
                             '0%, 100%': { transform: 'rotate(-3deg)' },
                             '50%': { transform: 'rotate(3deg)' },
+                        },
+                        heartBeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.3)' },
+                            '100%': { transform: 'scale(1)' },
                         }
                     }
                 }
@@ -49,17 +51,11 @@
         }
     </script>
     <style>
-        html { scroll-behavior: smooth; }
-        
-        /* 커스텀 스크롤바 */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #fff0f5; }
-        ::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 10px; border: 2px solid #fff0f5; }
-        
-        /* 텍스트 선택 색상 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 10px; }
         ::selection { background: #fbcfe8; color: #fff; }
 
-        /* 마스킹 테이프 효과 */
         .tape {
             background-color: rgba(255, 255, 255, 0.4);
             background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,0.5) 50%);
@@ -76,7 +72,6 @@
             opacity: 0.8;
         }
 
-        /* 섹션 구분 물결 무늬 */
         .wave-divider {
             position: absolute;
             bottom: 0;
@@ -84,6 +79,7 @@
             width: 100%;
             overflow: hidden;
             line-height: 0;
+            pointer-events: none;
         }
         .wave-divider svg {
             position: relative;
@@ -92,107 +88,105 @@
             height: 50px;
         }
         .wave-divider .shape-fill { fill: #FFFFFF; }
+        .dark .wave-divider .shape-fill { fill: #1e293b; }
         .wave-top .shape-fill { fill: #FDF4FF; } 
+        .dark .wave-top .shape-fill { fill: #0f172a; }
 
-        /* 귀여운 카드 호버 효과 */
-        .cute-card {
-            transition: all 0.3s ease;
-        }
-        .cute-card:hover {
-            transform: translateY(-5px) rotate(1deg);
-            box-shadow: 0 10px 25px -5px rgba(216, 180, 254, 0.4);
-        }
+        .cute-card { transition: all 0.3s ease; }
+        .cute-card:hover { transform: translateY(-5px) rotate(1deg); }
 
-        /* 방명록 포스트잇 스타일 */
         .post-it {
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.2s;
         }
         .post-it:hover {
-            transform: scale(1.05) rotate(-2deg);
+            transform: scale(1.03);
             z-index: 10;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
         }
         
-        /* 폰트 적용 */
+        .liked i {
+            color: #ef4444;
+            animation: heartBeat 0.3s ease-in-out;
+        }
+        
         h1, h2, h3, .nav-item { font-family: 'Jua', sans-serif; }
         .hand-text { font-family: 'Nanum Pen Script', cursive; font-size: 1.5rem; }
         
-        /* 스크롤바 숨기기 (포스트잇 내부용) */
-        .custom-scroll::-webkit-scrollbar {
-            width: 4px;
-        }
-        .custom-scroll::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.1);
-        }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); }
     </style>
 </head>
-<body class="bg-[#FDF4FF] text-slate-700 font-sans overflow-x-hidden relative">
+<body class="bg-[#FDF4FF] dark:bg-slate-900 text-slate-700 dark:text-slate-200 font-sans overflow-x-hidden relative transition-colors duration-300">
 
-    <!-- 배경 장식 -->
-    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="absolute top-20 left-[10%] text-4xl animate-float opacity-60">☁️</div>
-        <div class="absolute top-40 right-[15%] text-2xl animate-float-slow opacity-50">✨</div>
-        <div class="absolute bottom-[20%] left-[5%] text-5xl animate-float opacity-40">🌸</div>
-        <div class="absolute bottom-[10%] right-[10%] text-3xl animate-float-fast opacity-50">🌙</div>
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-60 dark:opacity-20">
+        <div class="absolute top-20 left-[10%] text-4xl animate-float">☁️</div>
+        <div class="absolute top-40 right-[15%] text-2xl animate-float-slow">✨</div>
+        <div class="absolute bottom-[20%] left-[5%] text-5xl animate-float">🌸</div>
+        <div class="absolute bottom-[10%] right-[10%] text-3xl animate-float-fast">🌙</div>
     </div>
 
     <!-- 네비게이션 -->
-    <nav class="bg-white/70 backdrop-blur-lg border-b border-white/50 fixed w-full z-50 transition-all duration-300 shadow-sm rounded-b-[2rem]">
+    <nav class="bg-white/70 dark:bg-slate-800/80 backdrop-blur-lg border-b border-white/50 dark:border-slate-700 fixed w-full z-50 transition-all duration-300 shadow-sm rounded-b-[2rem]">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl text-infp-dark hover:text-infp-main transition flex items-center group">
-                <span class="bg-purple-100 p-2 rounded-full mr-3 group-hover:rotate-12 transition text-2xl">🪶</span>
+            <a href="#" class="text-2xl md:text-3xl text-infp-dark dark:text-purple-300 hover:text-infp-main transition flex items-center group z-50">
+                <span class="bg-purple-100 dark:bg-slate-700 p-2 rounded-full mr-3 group-hover:rotate-12 transition text-2xl">🪶</span>
                 <span class="font-cute pt-1">Thought Garden</span>
             </a>
-            <div class="hidden lg:flex space-x-2 text-lg font-medium text-slate-600">
-                <a href="#society" class="nav-item px-5 py-2 rounded-full hover:bg-purple-100 hover:text-purple-600 transition">교육과 사회</a>
-                <a href="#infp" class="nav-item px-5 py-2 rounded-full hover:bg-purple-100 hover:text-purple-600 transition">INFP의 내면</a>
-                <a href="#relationship" class="nav-item px-5 py-2 rounded-full hover:bg-purple-100 hover:text-purple-600 transition">관계</a>
-                <a href="#comfort" class="nav-item px-5 py-2 rounded-full hover:bg-purple-100 hover:text-purple-600 transition">위로</a>
-                <a href="#guestbook" class="nav-item px-6 py-2 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full hover:shadow-lg hover:scale-105 transition transform shadow-md">
+            <div class="hidden lg:flex items-center space-x-2 text-lg font-medium text-slate-600 dark:text-slate-300">
+                <a href="#society" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">교육과 사회</a>
+                <a href="#infp" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">INFP의 내면</a>
+                <a href="#relationship" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">관계</a>
+                <a href="#comfort" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">위로</a>
+                <a href="#guestbook" class="nav-item px-5 py-2 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full hover:shadow-lg hover:scale-105 transition transform shadow-md">
                     <i class="fas fa-pen mr-1 text-sm"></i> 방명록
                 </a>
+                <button id="themeBtnDesktop" class="ml-4 p-2 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-yellow-300 hover:scale-110 transition">
+                    <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i>
+                </button>
             </div>
-             <!-- 모바일 메뉴 버튼 -->
-             <button id="mobile-menu-btn" class="lg:hidden text-purple-400 focus:outline-none bg-white p-2 rounded-xl shadow-sm">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+             <div class="flex items-center lg:hidden gap-3 z-50">
+                <button id="themeBtnMobile" class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-yellow-300">
+                    <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+                <button id="mobile-menu-btn" class="text-purple-500 dark:text-purple-300 focus:outline-none bg-white dark:bg-slate-700 p-2 rounded-xl shadow-sm">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+             </div>
         </div>
-        <!-- 모바일 메뉴 -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white/90 backdrop-blur border-t border-purple-100 absolute w-full shadow-lg rounded-b-2xl p-6">
-            <a href="#society" class="block py-4 px-6 text-xl text-slate-600 hover:bg-purple-50 rounded-xl font-cute">교육과 사회</a>
-            <a href="#infp" class="block py-4 px-6 text-xl text-slate-600 hover:bg-purple-50 rounded-xl font-cute">INFP의 내면</a>
-            <a href="#relationship" class="block py-4 px-6 text-xl text-slate-600 hover:bg-purple-50 rounded-xl font-cute">관계와 구원</a>
-            <a href="#comfort" class="block py-4 px-6 text-xl text-slate-600 hover:bg-purple-50 rounded-xl font-cute">마음의 위로</a>
-            <a href="#guestbook" class="block py-4 px-6 text-xl text-infp-dark font-bold hover:bg-purple-50 rounded-xl font-cute">💌 방명록 남기기</a>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 dark:bg-slate-800/95 backdrop-blur border-t border-purple-100 dark:border-slate-700 absolute w-full shadow-lg rounded-b-2xl p-6 top-full left-0 z-40">
+            <a href="#society" class="mobile-link block py-4 px-6 text-xl text-slate-600 dark:text-slate-200 hover:bg-purple-50 dark:hover:bg-slate-700 rounded-xl font-cute">교육과 사회</a>
+            <a href="#infp" class="mobile-link block py-4 px-6 text-xl text-slate-600 dark:text-slate-200 hover:bg-purple-50 dark:hover:bg-slate-700 rounded-xl font-cute">INFP의 내면</a>
+            <a href="#relationship" class="mobile-link block py-4 px-6 text-xl text-slate-600 dark:text-slate-200 hover:bg-purple-50 dark:hover:bg-slate-700 rounded-xl font-cute">관계와 구원</a>
+            <a href="#comfort" class="mobile-link block py-4 px-6 text-xl text-slate-600 dark:text-slate-200 hover:bg-purple-50 dark:hover:bg-slate-700 rounded-xl font-cute">마음의 위로</a>
+            <a href="#guestbook" class="mobile-link block py-4 px-6 text-xl text-infp-dark dark:text-purple-300 font-bold hover:bg-purple-50 dark:hover:bg-slate-700 rounded-xl font-cute">💌 방명록 남기기</a>
         </div>
     </nav>
 
     <!-- 히어로 섹션 -->
-    <header class="pt-48 pb-40 px-6 text-center relative z-10">
+    <header class="pt-40 md:pt-48 pb-20 px-6 text-center relative z-10">
         <div class="max-w-4xl mx-auto">
             <div class="inline-block animate-bounce mb-4 text-4xl">💌</div>
             <br>
-            <span class="inline-block py-2 px-8 rounded-full bg-white border-2 border-purple-200 text-purple-600 text-lg font-cute mb-8 shadow-sm transform -rotate-2">
+            <span class="inline-block py-2 px-6 md:px-8 rounded-full bg-white dark:bg-slate-800 border-2 border-purple-200 dark:border-slate-600 text-purple-600 dark:text-purple-300 text-base md:text-lg font-cute mb-8 shadow-sm transform -rotate-2">
                 인프피빵장님의 생각 노트
             </span>
-            <h1 class="text-5xl md:text-8xl font-cute text-slate-800 mb-10 leading-tight drop-shadow-sm">
+            <h1 class="text-4xl md:text-7xl lg:text-8xl font-cute text-slate-800 dark:text-slate-100 mb-10 leading-tight drop-shadow-sm">
                 현실에 발을 반만 담그고<br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400">이상을 꿈꾸는 우리</span>에게
             </h1>
             <div class="relative inline-block">
-                <p class="text-2xl md:text-3xl text-slate-600 leading-relaxed font-hand bg-white/50 inline-block px-8 py-4 rounded-3xl backdrop-blur-sm border border-white">
+                <p class="text-xl md:text-3xl text-slate-600 dark:text-slate-300 leading-relaxed font-hand bg-white/50 dark:bg-slate-800/50 inline-block px-8 py-4 rounded-3xl backdrop-blur-sm border border-white dark:border-slate-600">
                     세상의 잣대에 흔들리지 않고,<br class="md:hidden"> 고유한 내면의 빛을 지키는 방법에 대하여.
                 </p>
             </div>
-            
             <div class="mt-16">
-                <a href="#guestbook" class="group inline-flex items-center px-10 py-5 bg-white border-2 border-purple-200 rounded-full text-purple-600 hover:bg-purple-50 hover:border-purple-300 transition shadow-md font-cute text-xl">
+                <a href="#guestbook" class="group inline-flex items-center px-8 md:px-10 py-4 md:py-5 bg-white dark:bg-slate-800 border-2 border-purple-200 dark:border-slate-600 rounded-full text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-slate-700 hover:border-purple-300 transition shadow-md font-cute text-lg md:text-xl">
                     <span>방명록 보러가기</span>
                     <i class="fas fa-arrow-down ml-2 group-hover:translate-y-1 transition"></i>
                 </a>
             </div>
         </div>
-        <!-- 하단 물결 -->
         <div class="wave-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
@@ -200,41 +194,28 @@
         </div>
     </header>
 
-    <!-- 1. 교육과 사회 (내용 전체 복구) -->
-    <section id="society" class="py-24 bg-white relative z-10">
+    <!-- 1. 교육과 사회 -->
+    <section id="society" class="py-24 bg-white dark:bg-slate-800 relative z-10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20 relative">
-                <h2 class="text-5xl md:text-6xl font-cute text-slate-800 mb-6 inline-block relative z-10">
+                <h2 class="text-4xl md:text-6xl font-cute text-slate-800 dark:text-white mb-6 inline-block relative z-10">
                     교육과 사회에 대한 시선
-                    <span class="absolute bottom-1 left-0 w-full h-4 bg-yellow-200 -z-10 opacity-60 rounded-full transform -rotate-1"></span>
+                    <span class="absolute bottom-1 left-0 w-full h-4 bg-yellow-200 dark:bg-yellow-600 -z-10 opacity-60 rounded-full transform -rotate-1"></span>
                 </h2>
-                <p class="mt-4 text-slate-500 font-hand text-2xl">진정한 성장의 의미를 다시 묻다</p>
+                <p class="mt-4 text-slate-500 dark:text-slate-400 font-hand text-2xl">진정한 성장의 의미를 다시 묻다</p>
             </div>
-
             <div class="grid md:grid-cols-2 gap-10">
-                <div class="cute-card bg-[#fff5f5] p-10 rounded-[2.5rem] border-2 border-red-100 relative overflow-hidden group">
-                    <div class="tape bg-red-100/50 rotate-2"></div>
-                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-red-400 text-3xl mb-8 shadow-sm group-hover:scale-110 transition">🎯</div>
-                    <h3 class="text-3xl font-cute mb-4 text-slate-800">'스펙'은 무기의 제원이다</h3>
-                    <p class="text-slate-600 leading-relaxed font-hand text-2xl">스펙(Specification)은 원래 기계나 무기의 살상력을 뜻합니다. 한국 사회는 이를 인간에게 적용하여 사람을 존엄한 존재가 아닌 '기능적 도구'나 '무기'로 취급하고 있다고 비판했습니다.</p>
+                <div class="cute-card bg-[#fff5f5] dark:bg-slate-700/50 p-10 rounded-[2.5rem] border-2 border-red-100 dark:border-slate-600 relative overflow-hidden group">
+                    <div class="tape bg-red-100/50 dark:bg-slate-500/50 rotate-2"></div>
+                    <div class="w-20 h-20 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-red-400 text-3xl mb-8 shadow-sm group-hover:scale-110 transition">🎯</div>
+                    <h3 class="text-3xl font-cute mb-4 text-slate-800 dark:text-slate-100">'스펙'은 무기의 제원이다</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed font-hand text-2xl">스펙(Specification)은 원래 기계나 무기의 살상력을 뜻합니다. 우리는 스스로를 존엄한 존재가 아닌, '기능적 도구'로 취급하고 있지 않나요?</p>
                 </div>
-                <div class="cute-card bg-[#f0f9ff] p-10 rounded-[2.5rem] border-2 border-blue-100 relative overflow-hidden group">
-                    <div class="tape bg-blue-100/50 -rotate-2"></div>
-                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-blue-400 text-3xl mb-8 shadow-sm group-hover:scale-110 transition">🌱</div>
-                    <h3 class="text-3xl font-cute mb-4 text-slate-800">교육(E-ducare)의 참뜻</h3>
-                    <p class="text-slate-600 leading-relaxed font-hand text-2xl">'E(Out)' + 'ducare'. 교육은 지식을 억지로 집어넣는 '반(反)교육'이 아닙니다. 개인의 고유한 자아와 잠재력을 **'밖으로 끌어내는 것'**이어야 합니다.</p>
-                </div>
-                <div class="cute-card bg-[#fffbeb] p-10 rounded-[2.5rem] border-2 border-yellow-100 relative overflow-hidden group">
-                    <div class="tape bg-yellow-100/50 rotate-1"></div>
-                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-yellow-500 text-3xl mb-8 shadow-sm group-hover:scale-110 transition">🤝</div>
-                    <h3 class="text-3xl font-cute mb-4 text-slate-800">성숙한 시민의 조건</h3>
-                    <p class="text-slate-600 leading-relaxed font-hand text-2xl">독일 교육이 '반성'과 '죄책감'을 가르치듯, 진정한 성숙은 '우리가 무엇을 잘못했는가'를 성찰하는 데서 옵니다. 경쟁보다 협력이, 성공보다 연대가 우리를 더 단단하게 만듭니다.</p>
-                </div>
-                <div class="cute-card bg-[#f3e8ff] p-10 rounded-[2.5rem] border-2 border-purple-100 relative overflow-hidden group">
-                    <div class="tape bg-purple-100/50 -rotate-1"></div>
-                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-purple-500 text-3xl mb-8 shadow-sm group-hover:scale-110 transition">💎</div>
-                    <h3 class="text-3xl font-cute mb-4 text-slate-800">순수함을 지키는 용기</h3>
-                    <p class="text-slate-600 leading-relaxed font-hand text-2xl">자본주의의 '능력'이 때로는 포장 기술이나 정치력일지라도, 순수함을 잃지 않고 가치를 지키는 삶. 그것이 지옥 같은 현실에서도 우리를 구원할 것입니다.</p>
+                <div class="cute-card bg-[#f0f9ff] dark:bg-slate-700/50 p-10 rounded-[2.5rem] border-2 border-blue-100 dark:border-slate-600 relative overflow-hidden group">
+                    <div class="tape bg-blue-100/50 dark:bg-slate-500/50 -rotate-2"></div>
+                    <div class="w-20 h-20 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-blue-400 text-3xl mb-8 shadow-sm group-hover:scale-110 transition">🌱</div>
+                    <h3 class="text-3xl font-cute mb-4 text-slate-800 dark:text-slate-100">교육(E-ducare)의 참뜻</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed font-hand text-2xl">'E(Out)' + 'ducare'. 교육은 밖에서 안으로 억지로 집어넣는 것이 아닙니다. 당신 안의 고유한 잠재력을 밖으로 끌어내는 것입니다.</p>
                 </div>
             </div>
         </div>
@@ -245,44 +226,21 @@
         </div>
     </section>
 
-    <!-- 2. INFP의 내면 (내용 전체 복구) -->
-    <section id="infp" class="py-32 bg-[#FDF4FF] relative z-0">
+    <!-- 2. INFP의 내면 -->
+    <section id="infp" class="py-32 bg-[#FDF4FF] dark:bg-slate-900 relative z-0 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="flex flex-col md:flex-row items-center gap-16">
                 <div class="md:w-1/2">
-                    <span class="inline-block px-4 py-1 bg-purple-200 text-purple-700 rounded-lg font-cute text-base mb-6 transform -rotate-2">✨ Inner Self</span>
-                    <h2 class="text-5xl md:text-7xl font-cute text-slate-900 mt-2 mb-8">INFP,<br><span class="text-purple-500">아름다운 약점</span></h2>
-                    <p class="text-2xl text-slate-600 mb-10 leading-relaxed font-hand">섬세함은 약점이 아닙니다.<br>세상을 더 아름답게 만드는, 당신만의 특별한 렌즈입니다.</p>
-                    <div class="space-y-8">
-                        <div class="flex items-start bg-white/60 p-6 rounded-3xl backdrop-blur-sm border border-white">
-                            <span class="text-3xl mr-5">💖</span>
-                            <div>
-                                <h4 class="font-cute text-2xl text-slate-800">사회성은 '사랑받는 능력'</h4>
-                                <p class="text-xl text-slate-600 mt-2 font-hand">기계적인 적응이 아닙니다. 진실된 모습으로 깊은 사랑을 받아내는 힘, 그것이 당신의 사회성입니다.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start bg-white/60 p-6 rounded-3xl backdrop-blur-sm border border-white">
-                            <span class="text-3xl mr-5">🪞</span>
-                            <div>
-                                <h4 class="font-cute text-2xl text-slate-800">자책과 반성의 힘</h4>
-                                <p class="text-xl text-slate-600 mt-2 font-hand">자책은 우리를 괴물로 만들지 않게 하는 브레이크입니다. 건강한 죄책감은 성숙의 동력이 됩니다.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start bg-white/60 p-6 rounded-3xl backdrop-blur-sm border border-white">
-                            <span class="text-3xl mr-5">✒️</span>
-                            <div>
-                                <h4 class="font-cute text-2xl text-slate-800">모든 INFP는 작가다</h4>
-                                <p class="text-xl text-slate-600 mt-2 font-hand">삶 자체가 이야기인 당신. 현실에 발을 딛고 이상을 노래하는 당신은 이미 작가입니다.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <span class="inline-block px-4 py-1 bg-purple-200 dark:bg-purple-900 text-purple-700 dark:text-purple-200 rounded-lg font-cute text-base mb-6 transform -rotate-2">✨ Inner Self</span>
+                    <h2 class="text-5xl md:text-7xl font-cute text-slate-900 dark:text-white mt-2 mb-8">INFP,<br><span class="text-purple-500 dark:text-purple-400">아름다운 약점</span></h2>
+                    <p class="text-2xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed font-hand">섬세함은 약점이 아닙니다.<br>세상을 더 아름답게 만드는, 당신만의 특별한 렌즈입니다.</p>
                 </div>
                 <div class="md:w-1/2 w-full">
-                    <div class="bg-yellow-50 p-10 md:p-14 rounded-[3rem] shadow-md transform rotate-2 hover:rotate-0 transition duration-500 border border-yellow-100 text-center relative">
-                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-40 h-10 bg-purple-200/50 backdrop-blur-sm rotate-1 tape"></div>
-                        <i class="fas fa-book-open text-7xl text-purple-300 mb-8 animate-pulse"></i>
-                        <p class="font-hand text-3xl md:text-4xl text-slate-700 mb-8 leading-snug">"안전한 모험을 하세요.<br>나를 해치지 않는 선에서<br>끊임없이 나아갈 때,<br>비로소 아름다운 인연을 만납니다."</p>
-                        <span class="text-lg text-slate-400 font-cute bg-white px-5 py-2 rounded-full border border-slate-100">- 인프피빵장 -</span>
+                    <div class="bg-yellow-50 dark:bg-slate-800 p-10 md:p-14 rounded-[3rem] shadow-md transform rotate-2 hover:rotate-0 transition duration-500 border border-yellow-100 dark:border-slate-700 text-center relative">
+                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-40 h-10 bg-purple-200/50 dark:bg-purple-900/50 backdrop-blur-sm rotate-1 tape"></div>
+                        <i class="fas fa-book-open text-7xl text-purple-300 dark:text-purple-500 mb-8 animate-pulse"></i>
+                        <p class="font-hand text-3xl md:text-4xl text-slate-700 dark:text-slate-200 mb-8 leading-snug">"안전한 모험을 하세요.<br>나를 해치지 않는 선에서<br>끊임없이 나아갈 때,<br>비로소 아름다운 인연을 만납니다."</p>
+                        <span class="text-lg text-slate-400 dark:text-slate-500 font-cute bg-white dark:bg-slate-900 px-5 py-2 rounded-full border border-slate-100 dark:border-slate-600">- 인프피빵장 -</span>
                     </div>
                 </div>
             </div>
@@ -294,33 +252,33 @@
         </div>
     </section>
 
-    <!-- 3. 관계 (내용 전체 복구) -->
-    <section id="relationship" class="py-24 bg-white relative z-10">
+    <!-- 3. 관계 -->
+    <section id="relationship" class="py-24 bg-white dark:bg-slate-800 relative z-10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20">
-                <h2 class="text-5xl md:text-6xl font-cute text-slate-800 mb-6">관계의 온도</h2>
-                <p class="text-slate-500 font-hand text-2xl">진정한 구원과 도움에 대하여</p>
+                <h2 class="text-5xl md:text-6xl font-cute text-slate-800 dark:text-white mb-6">관계의 온도</h2>
+                <p class="text-slate-500 dark:text-slate-400 font-hand text-2xl">진정한 구원과 도움에 대하여</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="cute-card bg-gradient-to-br from-indigo-50 to-white p-8 rounded-[2rem] border border-indigo-100 text-center">
+                <div class="cute-card bg-gradient-to-br from-indigo-50 to-white dark:from-slate-700 dark:to-slate-800 p-8 rounded-[2rem] border border-indigo-100 dark:border-slate-600 text-center">
                     <div class="text-5xl mb-6">🤲</div>
-                    <h3 class="font-cute text-2xl mb-3 text-indigo-900">거마비 없는 도움</h3>
-                    <p class="text-xl font-hand text-slate-600">대가를 바라는 도움은 거래입니다. 조건 없이 내미는 손길만이 진정한 구원입니다.</p>
+                    <h3 class="font-cute text-2xl mb-3 text-indigo-900 dark:text-indigo-200">거마비 없는 도움</h3>
+                    <p class="text-xl font-hand text-slate-600 dark:text-slate-300">대가를 바라는 도움은 거래입니다. 조건 없이 내미는 손길만이 진정한 구원입니다.</p>
                 </div>
-                <div class="cute-card bg-gradient-to-br from-pink-50 to-white p-8 rounded-[2rem] border border-pink-100 text-center">
+                <div class="cute-card bg-gradient-to-br from-pink-50 to-white dark:from-slate-700 dark:to-slate-800 p-8 rounded-[2rem] border border-pink-100 dark:border-slate-600 text-center">
                     <div class="text-5xl mb-6">✂️</div>
-                    <h3 class="font-cute text-2xl mb-3 text-pink-900">혼자가 될 용기</h3>
-                    <p class="text-xl font-hand text-slate-600">결이 맞지 않는 관계는 끊어내세요. 스스로를 도울 줄 알 때 인연이 찾아옵니다.</p>
+                    <h3 class="font-cute text-2xl mb-3 text-pink-900 dark:text-pink-200">혼자가 될 용기</h3>
+                    <p class="text-xl font-hand text-slate-600 dark:text-slate-300">결이 맞지 않는 관계는 끊어내세요. 스스로를 도울 줄 알 때 인연이 찾아옵니다.</p>
                 </div>
-                 <div class="cute-card bg-gradient-to-br from-green-50 to-white p-8 rounded-[2rem] border border-green-100 text-center">
+                 <div class="cute-card bg-gradient-to-br from-green-50 to-white dark:from-slate-700 dark:to-slate-800 p-8 rounded-[2rem] border border-green-100 dark:border-slate-600 text-center">
                     <div class="text-5xl mb-6">🎁</div>
-                    <h3 class="font-cute text-2xl mb-3 text-green-900">주는 기쁨</h3>
-                    <p class="text-xl font-hand text-slate-600">'도움만 주는 공간'을 찾아보세요. 기여할 때 비로소 배부른 행복을 느낄 수 있습니다.</p>
+                    <h3 class="font-cute text-2xl mb-3 text-green-900 dark:text-green-200">주는 기쁨</h3>
+                    <p class="text-xl font-hand text-slate-600 dark:text-slate-300">'도움만 주는 공간'을 찾아보세요. 기여할 때 비로소 배부른 행복을 느낄 수 있습니다.</p>
                 </div>
-                <div class="cute-card bg-gradient-to-br from-orange-50 to-white p-8 rounded-[2rem] border border-orange-100 text-center">
+                <div class="cute-card bg-gradient-to-br from-orange-50 to-white dark:from-slate-700 dark:to-slate-800 p-8 rounded-[2rem] border border-orange-100 dark:border-slate-600 text-center">
                     <div class="text-5xl mb-6">😊</div>
-                    <h3 class="font-cute text-2xl mb-3 text-orange-900">재미보단 의미</h3>
-                    <p class="text-xl font-hand text-slate-600">박장대소하는 코미디보다, 잔잔한 미소를 짓게 하는 '위트'와 '의미'가 있는 삶을 지향합니다.</p>
+                    <h3 class="font-cute text-2xl mb-3 text-orange-900 dark:text-orange-200">재미보단 의미</h3>
+                    <p class="text-xl font-hand text-slate-600 dark:text-slate-300">박장대소하는 코미디보다, 잔잔한 미소를 짓게 하는 '의미'있는 삶을 지향합니다.</p>
                 </div>
             </div>
         </div>
@@ -331,302 +289,51 @@
         </div>
     </section>
 
-    <!-- 4. 마음의 위로와 공지 (내용 전체 복구 17~52) -->
-    <section id="comfort" class="py-24 bg-[#FDF4FF] relative z-10">
+    <!-- 4. 마음의 위로와 공지 -->
+    <section id="comfort" class="py-24 bg-[#FDF4FF] dark:bg-slate-900 relative z-10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20">
-                <span class="inline-block bg-white px-5 py-2 rounded-full text-infp-dark font-cute text-base border border-purple-100 shadow-sm mb-6">💜 Comfort & Notice</span>
-                <h2 class="text-5xl md:text-6xl font-cute text-slate-800 mb-6">마음의 위로와 공지</h2>
-                <p class="text-slate-500 max-w-3xl mx-auto font-hand text-2xl">방장님이 전하는 따뜻한 진심과 위로의 말들을 모았습니다.<br>힘들 때마다 이곳에서 쉬어가세요.</p>
+                <span class="inline-block bg-white dark:bg-slate-800 px-5 py-2 rounded-full text-infp-dark dark:text-purple-300 font-cute text-base border border-purple-100 dark:border-slate-600 shadow-sm mb-6">💜 Comfort & Notice</span>
+                <h2 class="text-5xl md:text-6xl font-cute text-slate-800 dark:text-white mb-6">마음의 위로와 공지</h2>
+                <p class="text-slate-500 dark:text-slate-400 max-w-3xl mx-auto font-hand text-2xl">방장님이 전하는 따뜻한 진심과 위로의 말들을 모았습니다.<br>힘들 때마다 이곳에서 쉬어가세요.</p>
             </div>
 
-            <!-- Masonry Layout using CSS Columns -->
             <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
                 <!-- 17 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="tape bg-purple-200/50 -rotate-2"></div>
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 17.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">신념이 흔들릴 때</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
+                <div class="break-inside-avoid bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative overflow-hidden group">
+                    <div class="tape bg-purple-200/50 dark:bg-purple-900/50 -rotate-2"></div>
+                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 17.</div>
+                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition">신념이 흔들릴 때</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">
                         믿음이란 건 현실에서 무언가를 내어주면 내어줄수록 커집니다. 여러분은 제게 현실적인 것을 주지 않아 믿음이 흔들릴 수 있습니다. 그럴 때마다 저의 진심과 순수함을 기억해주세요.
                     </p>
                 </div>
-                <!-- 18 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative overflow-hidden group">
-                     <div class="tape bg-blue-200/50 rotate-1"></div>
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 18.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">9와 4분의 3 승강장</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        간단히 지나가는 곳 같지만, 방의 매력을 알지 못하면 오래 머물 수 없는 인프피를 위한 깊은 신뢰의 공간에 오신 걸 환영합니다!
-                    </p>
-                </div>
-                <!-- 19 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 19.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">Empowerment</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        방의 운영방식은 경영의 임파워먼트(권한 위임) 방식과 유사합니다. 방의 구성원인 여러분이 주인공이며, 주체입니다^^
-                    </p>
-                </div>
                 <!-- 20 -->
-                <div class="break-inside-avoid bg-gradient-to-br from-purple-400 to-indigo-400 p-8 rounded-[2rem] shadow-md text-white transform rotate-1 hover:rotate-0 transition">
+                <div class="break-inside-avoid bg-gradient-to-br from-purple-400 to-indigo-400 dark:from-purple-800 dark:to-indigo-800 p-8 rounded-[2rem] shadow-md text-white transform rotate-1 hover:rotate-0 transition">
                     <div class="text-purple-100 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-heart mr-3 text-sm"></i> 20.</div>
                     <h3 class="font-cute text-3xl mb-4">아가페</h3>
                     <p class="text-purple-50 text-2xl leading-relaxed font-hand">
                         전 무교이지만, 상대방이 어떤 존재라도 이해하려 노력합니다. 여러분이 저를 조건 없이 대해 준다면, 저 역시 여러분을 절대적으로 사랑하겠습니다 >_<
                     </p>
                 </div>
-                <!-- 21 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 21.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">Leader vs Reader</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        진정한 리더는 앞에서 사람을 이끄는 존재(Leader)가 아닌, 뒤에서 사람의 마음을 읽는 존재(Reader)라고 생각합니다.
-                    </p>
-                </div>
-                <!-- 22 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 22.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">대화와 성품</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        대화의 양이 많고 적음이 중요하지 않습니다. 다만, 본인이 어떤 성품을 지녔는지는 대화를 통해서만 알 수 있습니다.
-                    </p>
-                </div>
-                <!-- 23 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 23.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">미움 받을 용기</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        최선을 다해도 누군가는 당신을 미워합니다. 하지만 그 모습이 행복을 불러옵니다. 소수의 미움 때문에 올곧은 행동을 포기하지 마세요.
-                    </p>
-                </div>
-                <!-- 24 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 24.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">기대와 존중</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        처음에 갖는 기대는 환상에 가깝습니다. 기대가 없으면 실망도 없어요. 상대방을 있는 그대로 존중해주도록 노력합시다!
-                    </p>
-                </div>
-                <!-- 25 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 25.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">따뜻한 배려</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        인프피가 차가운 말을 할 때는 몇 번을 참았다 뱉는 말일 거예요. 알 거 다 알면서 포근한 분들이니 따뜻하게 대해주세요.
-                    </p>
-                </div>
-                <!-- 26 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 26.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">겸손의 미덕</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        상대방이 편할수록 더 소중히, 가진 것이 많을수록 더 겸손하세요. 자랑은 자만, 겸손은 존경과 비슷한 말입니다.
-                    </p>
-                </div>
-                <!-- 27 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 27.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">빛과 그림자</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        본인만 대단한 걸 모르는 존재가 되세요. 빛은 환하게 비쳐주는 사람들이 없으면 무용지물입니다. 본인이 뛰어난 이유는 타인이 존재하기 때문임을 명심하세요.
-                    </p>
-                </div>
-                <!-- 28 -->
-                <div class="break-inside-avoid bg-purple-50 p-8 rounded-[2rem] shadow-inner border border-purple-100 relative overflow-hidden">
-                    <div class="tape bg-purple-200 rotate-1"></div>
-                    <div class="text-purple-500 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-heart mr-3 text-sm"></i> 28.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-purple-800">한결같은 사람</h3>
-                    <p class="text-slate-700 text-2xl leading-relaxed font-hand">
-                        한 사람을 오랫동안 대하는 태도가 변함없는 것이 한결같음입니다. 설령 상대방이 위험한 사람이라도 내가 한결같으면, 그 사람을 아름다운 존재로 바꿀 수 있다고 믿어요.
-                    </p>
-                </div>
-                <!-- 29 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 29.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">내면의 호기심</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        "이 사람은 어떤 생각을 가졌을까?"라는 호기심을 가지세요. 타인의 진짜 내면은 오랜 만남 후에 드러납니다. 장기적인 내면의 호기심이 좋은 사람을 알아보는 열쇠입니다.
-                    </p>
-                </div>
-                <!-- 30 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 30.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">선한 신념</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        선한 신념은 유지하기 불편하고 많은 인내가 필요합니다. 하지만 꿋꿋이 유지하면 세상의 아름다움은 내 마음속에 있다는 걸 느끼게 될 거예요. 무너지고 싶을 때 천국방을 찾아주세요.
-                    </p>
-                </div>
-                <!-- 31 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 31.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">느림의 미학</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        인생은 달리기가 아닙니다. 느리다고 뒤쳐지는 게 아니에요. 느릴수록 더 넓게 보고 더 깊게 느낄 수 있습니다.
-                    </p>
-                </div>
-                <!-- 32 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 32.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">순간을 느끼기</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        사진으로 남기는 것보다 그 순간의 행복한 내 모습으로 만족하세요. 인생의 주체는 내가 되어야 합니다.
-                    </p>
-                </div>
-                <!-- 33 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 33.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">얕고 오래 보기</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        타인을 한 번에 알려고 하지 말고 천천히 알아가세요. 종이 한 장이 수백 장 쌓이면 뚫리지 않듯, 튼튼한 인연을 만들어가요.
-                    </p>
-                </div>
-                <!-- 34 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 34.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">존중</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        맞지 않는 사람을 억지로 바꾸려 하지 마세요. 있는 그대로 받아들이고 존중해주세요. 가장 좋은 건 스스로 깨닫게 해주는 사람이 되는 것입니다.
-                    </p>
-                </div>
-                <!-- 35 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 35.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">결단의 순간</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        중요한 순간에는 결단하세요. 결단은 진짜 좋은 사람을 가리는 과정입니다. 단 몇 명만 남더라도 그건 성공한 거예요.
-                    </p>
-                </div>
-                <!-- 36 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 36.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">사람이 제일 소중해</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        세상에서 가장 소중한 건 사람입니다. 관계에 지치고 포기하고 싶을 때, 그 낙담을 씻어줄 소중한 사람이 또 나타날 거예요.
-                    </p>
-                </div>
                 <!-- 37 -->
-                <div class="break-inside-avoid bg-purple-100 p-8 rounded-[2rem] shadow-inner border border-purple-200">
-                    <div class="text-purple-600 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-crown mr-3 text-sm"></i> 37.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-purple-900">인프피를 구하라</h3>
-                    <p class="text-purple-800 text-2xl leading-relaxed font-hand">
+                <div class="break-inside-avoid bg-purple-100 dark:bg-slate-700 p-8 rounded-[2rem] shadow-inner border border-purple-200 dark:border-slate-600">
+                    <div class="text-purple-600 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-crown mr-3 text-sm"></i> 37.</div>
+                    <h3 class="font-cute text-3xl mb-4 text-purple-900 dark:text-purple-200">인프피를 구하라</h3>
+                    <p class="text-purple-800 dark:text-slate-300 text-2xl leading-relaxed font-hand">
                         잔다르크처럼, 이 방이 공허한 인프피들의 마음을 구하는 쉼터가 되었으면 좋겠습니다. 머무는 동안 현실의 고통을 덜고 행복하세요!
                     </p>
                 </div>
-                <!-- 38 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 38.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">사랑은 축복</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        선택한 단 한 사람을 외롭게 두지 마세요. 생이 망가지지 않을 정도로 후회 없는 사랑을 하세요. 둘만의 무대를 만드시길 바랍니다.
-                    </p>
-                </div>
-                <!-- 39 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 39.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">천국방과 나</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        천국방은 저의 내면이 고스란히 담긴 곳입니다. 저와 가까워지고 싶다면 이 방과 구성원들을 사랑해주세요. 그것이 저와 진정으로 가까워지는 길입니다.
-                    </p>
-                </div>
                 <!-- 40 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 40.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">울어도 돼요</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
+                <div class="break-inside-avoid bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
+                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 40.</div>
+                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition">울어도 돼요</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">
                         혼자 우는 게 서럽다는 걸 알아요. 마음의 흙이 씻겨 내려갈 때까지 따뜻한 사람들이 함께 있어줄 거예요.
                     </p>
                 </div>
-                <!-- 41 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 41.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">위대한 쇼맨</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        당신은 위대합니다. 아무에게도 꺼내지 못한 보물을 보여주세요. 조금만 용기 내주세요. 당신의 기쁨을 위하여.
-                    </p>
-                </div>
-                <!-- 42 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 42.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">뭣이 중헌디!</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        편견 없이 서로의 따뜻함을 나누는 것이 중요합니다. 바뀌려는 의지가 있다면 어느새 멋진 사람이 되어 있을 거예요. 천천히 그때를 기다립시다.
-                    </p>
-                </div>
-                <!-- 43 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 43.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">인생은 모험</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        안정적인 곳에 안주하지 말고 미지의 세상으로 뛰어드세요. 새로운 세상에서 주인이 되어 행복한 인생을 개척합시다.
-                    </p>
-                </div>
-                <!-- 44 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 44.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">아이를 지켜주세요</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        인프피는 아이처럼 순수한 존재입니다. 어른이 되어서도 아이로 살아가는 이들을 위한 이 공간이 무너지지 않게 존중하고 지켜주세요.
-                    </p>
-                </div>
-                <!-- 45 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 45.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">네 멋대로 해라</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        꿈이 멀어져 간다면 평판은 과감히 던져버리고 나아가세요. 멋있는 꿈을 위해 멋대로 하는 당신을 응원합니다.
-                    </p>
-                </div>
-                <!-- 46 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 46.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">자책하되 좌절 금지</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        자책을 통해 깨달음을 얻되, 깊은 수렁에 빠지지는 마세요. 잘못된 부분만 반성하고 성찰하여 변화하세요.
-                    </p>
-                </div>
-                <!-- 47 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 47.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">진실을 찾는 존재들</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        인프피는 맑은 물 같아서 진실을 찾으려 노력합니다. 그대들이 있기에 세상은 검어지지 않습니다.
-                    </p>
-                </div>
-                <!-- 48 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 48.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">결, 단결, 해결</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        진정한 해결은 결이 같은 사람들끼리 모였을 때 이루어집니다. 하얀 결을 가진 사람들이 모여 현실에서 못다 한 마음의 해결을 해나갑시다.
-                    </p>
-                </div>
-                <!-- 49 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 49.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">이상은 미래의 현실</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        건실한 이상은 불가능한 꿈이 아니라 미래에 다가올 일입니다. 이상을 포기하지 마세요. 그 이상이 여러분을 빛나게 할 것입니다.
-                    </p>
-                </div>
-                <!-- 50 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 50.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">살아있는 책</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        천국방은 여러분이 실시간으로 써 내려가는 살아있는 책입니다. 같은 시대를 살아가는 존재로서 지친 마음을 치유하세요.
-                    </p>
-                </div>
-                <!-- 51 -->
-                <div class="break-inside-avoid bg-white p-8 rounded-[2rem] shadow-sm border border-purple-100 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 51.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 group-hover:text-purple-600 transition">작은 나눔</h3>
-                    <p class="text-slate-600 text-2xl leading-relaxed font-hand">
-                        아주 작은 일상이라도 대화를 통해 나눠주세요. 소소한 행복이 퍼져 모두가 미소 짓게 될 것입니다.
-                    </p>
-                </div>
                  <!-- 52 -->
-                <div class="break-inside-avoid bg-gradient-to-br from-indigo-400 to-purple-500 p-8 rounded-[2rem] shadow-md text-white transform rotate-1 hover:rotate-0 transition">
+                <div class="break-inside-avoid bg-gradient-to-br from-indigo-400 to-purple-500 dark:from-indigo-800 dark:to-purple-800 p-8 rounded-[2rem] shadow-md text-white transform rotate-1 hover:rotate-0 transition">
                     <div class="text-purple-100 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-shield-alt mr-3 text-sm"></i> 52.</div>
                     <h3 class="font-cute text-3xl mb-4">천국 파수꾼</h3>
                     <p class="text-purple-50 text-2xl leading-relaxed font-hand">
@@ -642,25 +349,25 @@
         </div>
     </section>
 
-    <!-- ★★★ NEW: 실시간 방명록 섹션 ★★★ -->
-    <section id="guestbook" class="py-24 bg-slate-800 relative z-10">
-        <div class="max-w-4xl mx-auto px-6">
+    <!-- ★★★ NEW: 방명록 섹션 (좋아요 & 정렬) ★★★ -->
+    <section id="guestbook" class="py-24 bg-slate-800 dark:bg-slate-950 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
                 <span class="inline-block bg-slate-700 px-4 py-1 rounded-full text-purple-300 font-cute text-sm mb-4">Real-time Guestbook</span>
                 <h2 class="text-5xl font-cute text-white mb-4">
                     <i class="fas fa-envelope-open-text mr-3 text-purple-400"></i>마음의 방명록
                 </h2>
-                <p class="text-slate-400 font-hand text-2xl">방장님에게 하고 싶은 말이나, 다녀간 흔적을 남겨주세요.<br>(실시간으로 저장됩니다!)</p>
+                <p class="text-slate-400 font-hand text-2xl">방장님에게 하고 싶은 말이나, 다녀간 흔적을 남겨주세요.<br>(최근 100개의 메시지가 보입니다!)</p>
             </div>
 
             <!-- 입력 폼 -->
-            <div class="bg-slate-700 p-8 rounded-[2rem] shadow-sm mb-16 border border-slate-600">
+            <div class="bg-slate-700 dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm mb-8 border border-slate-600">
                 <form id="guestForm" class="flex flex-col gap-4">
-                    <div class="flex gap-4">
+                    <div class="flex flex-col md:flex-row gap-4">
                         <input type="text" id="nameInput" placeholder="닉네임" required maxlength="10"
-                            class="w-1/3 px-6 py-3 rounded-full border-2 border-slate-600 bg-slate-800 text-white focus:outline-none focus:border-purple-400 font-cute text-lg">
+                            class="w-full md:w-1/3 px-6 py-3 rounded-full border-2 border-slate-600 bg-slate-800 dark:bg-slate-950 text-white focus:outline-none focus:border-purple-400 font-cute text-lg">
                         <input type="text" id="msgInput" placeholder="따뜻한 한마디를 남겨주세요..." required
-                            class="w-2/3 px-6 py-3 rounded-full border-2 border-slate-600 bg-slate-800 text-white focus:outline-none focus:border-purple-400 font-hand text-2xl">
+                            class="w-full md:w-2/3 px-6 py-3 rounded-full border-2 border-slate-600 bg-slate-800 dark:bg-slate-950 text-white focus:outline-none focus:border-purple-400 font-hand text-2xl">
                     </div>
                     <button type="submit" 
                         class="w-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white font-cute text-xl py-3 rounded-full transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
@@ -669,30 +376,36 @@
                 </form>
             </div>
 
-            <!-- 메시지 목록이 표시될 곳 -->
-            <div id="messageList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 여기에 자바스크립트로 포스트잇이 짠! 하고 생깁니다 -->
-                <div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">
-                    아직 남겨진 메시지가 없어요. 첫 번째 주인공이 되어주세요! <i class="fas fa-sparkles text-yellow-400"></i>
+            <!-- 정렬 버튼 -->
+            <div class="flex justify-end mb-4 gap-2">
+                <button id="sortLatest" class="px-4 py-2 bg-purple-500 text-white rounded-full font-cute text-sm hover:bg-purple-600 transition shadow-md">최신순</button>
+                <button id="sortLikes" class="px-4 py-2 bg-slate-700 text-slate-300 rounded-full font-cute text-sm hover:bg-slate-600 transition shadow-md">좋아요순</button>
+            </div>
+
+            <!-- 게시판 영역 -->
+            <div class="bg-slate-900/50 p-6 rounded-3xl border border-slate-700 backdrop-blur-sm">
+                <div id="messageList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scroll">
+                    <!-- 포스트잇이 여기에 생깁니다 -->
+                    <div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">
+                        데이터를 불러오는 중이에요... <i class="fas fa-spinner fa-spin"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 푸터 -->
-    <footer class="bg-slate-900 text-slate-400 py-16 text-center relative z-10 border-t border-slate-800">
+    <footer class="bg-slate-900 dark:bg-black text-slate-400 py-16 text-center relative z-10 border-t border-slate-800">
         <p class="font-hand text-3xl mb-2 text-purple-300">"그럼에도 불구하고, 당신은 아름다운 사람입니다."</p>
         <p class="text-base font-cute opacity-60">INFP Thought Garden © 2024</p>
     </footer>
 
-    <!-- ★★★ 파이어베이스 연동 스크립트 ★★★ -->
     <script type="module">
-        // 1. 파이어베이스 라이브러리 가져오기
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } 
-            from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, serverTimestamp, updateDoc, doc, increment } 
+            from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // 2. 파이어베이스 설정값
+        // ★★★ 빵장님의 파이어베이스 설정값 (완벽 적용!) ★★★
         const firebaseConfig = {
             apiKey: "AIzaSyBB7B_6-b0k-NQdlBAoPyzjq4O-UJq9-Rk",
             authDomain: "infp-love.firebaseapp.com",
@@ -702,11 +415,14 @@
             appId: "1:744268532848:web:b8ddb3b17b5d496b4338b5"
         };
 
-        // 3. 파이어베이스 시작!
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 4. 방명록 쓰기 기능
+        // 정렬 상태 관리
+        let currentSort = 'date';
+        let unsubscribe; 
+
+        // 방명록 쓰기
         const form = document.getElementById('guestForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); 
@@ -720,58 +436,160 @@
                     name: name,
                     message: msg,
                     date: serverTimestamp(),
-                    color: Math.floor(Math.random() * 4)
+                    color: Math.floor(Math.random() * 4),
+                    likes: 0 // 좋아요 초기값
                 });
                 form.reset();
                 alert("소중한 메시지가 저장되었어요! 💜");
             } catch (error) {
                 console.error("Error adding document: ", error);
-                alert("앗! 글이 안 써지나요? 파이어베이스 '규칙(Rules)' 설정을 확인해주세요! (true로 변경 필요)");
+                alert("설정 오류! 잠시 후 다시 시도해주세요.");
             }
         });
 
-        // 5. 방명록 읽기 기능
-        const messageList = document.getElementById('messageList');
-        const q = query(collection(db, "guestbook"), orderBy("date", "desc"));
+        // 방명록 읽기 함수
+        function loadMessages(sortField) {
+            const messageList = document.getElementById('messageList');
+            const q = query(collection(db, "guestbook"), orderBy(sortField, "desc"), limit(100));
 
-        // 데이터 읽기 시도 (에러 발생 시 경고창 띄움)
-        onSnapshot(q, (snapshot) => {
-            messageList.innerHTML = "";
-            const colors = ['bg-yellow-100', 'bg-pink-100', 'bg-blue-100', 'bg-green-100']; 
-
-            if (snapshot.empty) {
-                 messageList.innerHTML = `<div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">아직 남겨진 메시지가 없어요. 첫 번째 주인공이 되어주세요! <i class="fas fa-sparkles text-yellow-400"></i></div>`;
-                 return;
+            if (unsubscribe) {
+                unsubscribe();
             }
 
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                const colorClass = colors[data.color] || 'bg-yellow-100';
-                
-                let dateStr = "";
-                if(data.date) {
-                    const date = data.date.toDate();
-                    dateStr = `${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+            unsubscribe = onSnapshot(q, (snapshot) => {
+                messageList.innerHTML = "";
+                const colors = ['bg-yellow-100', 'bg-pink-100', 'bg-blue-100', 'bg-green-100']; 
+
+                if(snapshot.empty) {
+                    messageList.innerHTML = `<div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">아직 남겨진 메시지가 없어요. 첫 번째 주인공이 되어주세요! ✨</div>`;
+                    return;
                 }
 
-                const card = `
-                    <div class="post-it ${colorClass} p-6 h-48 flex flex-col justify-between rotate-1 text-slate-800">
-                        <div class="font-hand text-2xl overflow-y-auto custom-scroll">
-                            "${data.message}"
+                snapshot.forEach((document) => {
+                    const data = document.data();
+                    const docId = document.id; 
+                    const colorClass = colors[data.color] || 'bg-yellow-100';
+                    const likeCount = data.likes || 0;
+                    
+                    const isLiked = localStorage.getItem(`liked_${docId}`) ? 'liked' : '';
+                    const heartIcon = isLiked ? 'fas' : 'far'; 
+
+                    let dateStr = "";
+                    if(data.date) {
+                        const date = data.date.toDate();
+                        dateStr = `${date.getMonth()+1}/${date.getDate()}`;
+                    }
+
+                    const card = `
+                        <div class="post-it ${colorClass} p-4 h-40 flex flex-col justify-between rotate-1 text-slate-800 rounded-xl hover:z-50 hover:scale-110 transition duration-200 relative group">
+                            <div class="font-hand text-xl leading-snug overflow-y-auto custom-scroll mb-2">
+                                "${data.message}"
+                            </div>
+                            
+                            <div class="flex justify-between items-end border-t border-black/10 pt-1">
+                                <span class="font-cute text-xs truncate max-w-[50%]">By. ${data.name}</span>
+                                <span class="text-[10px] opacity-60 font-sans">${dateStr}</span>
+                            </div>
+
+                            <!-- 좋아요 버튼 -->
+                            <button onclick="toggleLike('${docId}')" class="absolute bottom-2 right-2 p-1 rounded-full hover:bg-white/50 transition ${isLiked} text-red-500">
+                                <i class="${heartIcon} fa-heart"></i> <span class="text-xs font-bold font-sans">${likeCount}</span>
+                            </button>
                         </div>
-                        <div class="flex justify-between items-end mt-4 border-t border-black/10 pt-2">
-                            <span class="font-cute text-sm">By. ${data.name}</span>
-                            <span class="text-xs opacity-60 font-sans">${dateStr}</span>
-                        </div>
-                    </div>
-                `;
-                messageList.innerHTML += card;
+                    `;
+                    messageList.innerHTML += card;
+                });
             });
-        }, (error) => {
-            console.error("Read error:", error);
-            alert("데이터를 불러오지 못했어요! 😭 파이어베이스 규칙(Rules)이 'true'로 설정되어 있는지 꼭 확인해주세요.");
+        }
+
+        // 좋아요 기능 (전역 함수)
+        window.toggleLike = async (docId) => {
+            if (localStorage.getItem(`liked_${docId}`)) {
+                alert("이미 공감한 메시지입니다! 💜");
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "guestbook", docId);
+                await updateDoc(docRef, {
+                    likes: increment(1) 
+                });
+                
+                localStorage.setItem(`liked_${docId}`, "true");
+                
+            } catch (error) {
+                console.error("좋아요 오류:", error);
+            }
+        };
+
+        // 정렬 버튼 이벤트
+        const btnLatest = document.getElementById('sortLatest');
+        const btnLikes = document.getElementById('sortLikes');
+
+        btnLatest.addEventListener('click', () => {
+            currentSort = 'date';
+            updateSortUI();
+            loadMessages('date');
         });
+
+        btnLikes.addEventListener('click', () => {
+            currentSort = 'likes';
+            updateSortUI();
+            loadMessages('likes');
+        });
+
+        function updateSortUI() {
+            if(currentSort === 'date') {
+                btnLatest.className = "px-4 py-2 bg-purple-500 text-white rounded-full font-cute text-sm transition shadow-md";
+                btnLikes.className = "px-4 py-2 bg-slate-700 text-slate-300 rounded-full font-cute text-sm hover:bg-slate-600 transition shadow-md";
+            } else {
+                btnLikes.className = "px-4 py-2 bg-pink-500 text-white rounded-full font-cute text-sm transition shadow-md";
+                btnLatest.className = "px-4 py-2 bg-slate-700 text-slate-300 rounded-full font-cute text-sm hover:bg-slate-600 transition shadow-md";
+            }
+        }
+
+        // 초기 실행
+        loadMessages('date');
+
+        // 모바일 메뉴 & 다크모드 로직
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const themeBtnDesktop = document.getElementById('themeBtnDesktop');
+        const themeBtnMobile = document.getElementById('themeBtnMobile');
+        const html = document.documentElement;
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        function toggleTheme() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        themeBtnDesktop.addEventListener('click', toggleTheme);
+        themeBtnMobile.addEventListener('click', toggleTheme);
     </script>
 </body>
 </html>
+
 
