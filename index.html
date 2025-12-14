@@ -396,10 +396,11 @@
                 </div>
             </div>
             
-            <div id="youtube-players" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
+            <div id="youtube-players" style="position: fixed; bottom: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none;">
                 <div id="player0"></div>
                 <div id="player1"></div>
                 <div id="player2"></div>
+</div>
             </div>
         </div>
     </section>
@@ -537,16 +538,21 @@
 
         // --- 유튜브 플레이어 로직 ---
         window.player = [];
-        window.onYouTubeIframeAPIReady = function() {
-            const videoIds = ['NWUnDp-iNkU', 'r9chqaNT340', 'ENGoSMNqQWs'];
-            videoIds.forEach((id, index) => {
-                player[index] = new YT.Player(`player${index}`, {
-                    height: '1', width: '1', videoId: id,
-                    playerVars: { 'playsinline': 1, 'origin': window.location.origin },
-                    events: { 'onStateChange': onPlayerStateChange }
-                });
-            });
-        };
+       window.onYouTubeIframeAPIReady = function() {
+              const videoIds = ['NWUnDp-iNkU', 'r9chqaNT340', 'ENGoSMNqQWs'];
+              videoIds.forEach((id, index) => {
+                    player[index] = new YT.Player(`player${index}`, {
+                          height: '10', width: '10', videoId: id, // 크기 10으로 변경
+                          playerVars: { 
+                                 'playsinline': 1, // 아이폰 전체화면 방지
+                                 'origin': window.location.origin 
+            },
+            events: { 
+                'onStateChange': onPlayerStateChange 
+            }
+        });
+    });
+};
         function onPlayerStateChange(event) {}
         window.toggleAudio = function(index) {
             const btn = document.getElementById(`btn${index}`);
@@ -732,3 +738,4 @@
     </script>
 </body>
 </html>
+
