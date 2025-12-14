@@ -55,6 +55,7 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 10px; }
+        
         .tape {
             background-color: rgba(255, 255, 255, 0.4);
             background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,0.5) 50%);
@@ -70,6 +71,7 @@
             backdrop-filter: blur(2px);
             opacity: 0.8;
         }
+
         .wave-divider {
             position: absolute;
             bottom: 0;
@@ -89,8 +91,10 @@
         .dark .wave-divider .shape-fill { fill: #1e293b; }
         .wave-top .shape-fill { fill: #FDF4FF; } 
         .dark .wave-top .shape-fill { fill: #0f172a; }
+
         .cute-card { transition: all 0.3s ease; }
         .cute-card:hover { transform: translateY(-5px) rotate(1deg); }
+
         .perspective { perspective: 1000px; }
         .card-inner {
             position: relative;
@@ -111,6 +115,7 @@
         }
         .card-back { transform: rotateY(180deg); }
         .flipped .card-inner { transform: rotateY(180deg); }
+
         .post-it {
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.2s;
@@ -120,9 +125,12 @@
             z-index: 10;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
         }
+        
         .liked i { color: #ef4444; animation: heartBeat 0.3s ease-in-out; }
+        
         h1, h2, h3, .nav-item { font-family: 'Jua', sans-serif; }
         .hand-text { font-family: 'Nanum Pen Script', cursive; font-size: 1.5rem; }
+        
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); }
         
@@ -145,7 +153,7 @@
                 <span class="font-cute pt-1">Thought Garden</span>
             </a>
             <div class="hidden lg:flex items-center space-x-2 text-lg font-medium text-slate-600 dark:text-slate-300">
-                <a href="#society" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">교육과 사회</a>
+                <a href="#society" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">교육/사회</a>
                 <a href="#infp" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">INFP</a>
                 <a href="#relationship" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">관계</a>
                 <a href="#comfort" class="nav-item px-4 py-2 rounded-full hover:bg-purple-100 dark:hover:bg-slate-700 transition">위로</a>
@@ -421,8 +429,8 @@
                 </div>
             </div>
             
-            <!-- 숨겨진 유튜브 플레이어 -->
-            <div id="youtube-players" class="hidden">
+            <!-- 숨겨진 유튜브 플레이어 (1px 크기, 투명) -->
+            <div id="youtube-players" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
                 <div id="player0"></div>
                 <div id="player1"></div>
                 <div id="player2"></div>
@@ -430,7 +438,7 @@
         </div>
     </section>
 
-    <!-- 4. 마음의 위로와 공지 -->
+    <!-- 4. 마음의 위로와 공지 (최적화 적용: 내용은 JS로 로드) -->
     <section id="comfort" class="py-24 bg-white dark:bg-slate-800 relative z-10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20">
@@ -438,232 +446,14 @@
                 <h2 class="text-5xl md:text-6xl font-cute text-slate-800 dark:text-white mb-6">마음의 위로와 공지</h2>
                 <p class="text-slate-500 dark:text-slate-400 max-w-3xl mx-auto font-hand text-2xl">방장님이 전하는 따뜻한 진심과 위로의 말들을 모았습니다.<br>힘들 때마다 이곳에서 쉬어가세요.</p>
             </div>
-
-            <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-                <!-- 17 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 17.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">신념이 흔들릴 때</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">믿음이란 건 현실에서 무언가를 내어주면 내어줄수록 커집니다. 여러분은 제게 현실적인 것을 주지 않아 믿음이 흔들릴 수 있습니다. 그럴 때마다 저의 진심과 순수함을 기억해주세요.</p>
-                </div>
-                <!-- 18 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 18.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">9와 4분의 3 승강장</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">간단히 지나가는 곳 같지만, 방의 매력을 알지 못하면 오래 머물 수 없는 인프피를 위한 깊은 신뢰의 공간에 오신 걸 환영합니다!</p>
-                </div>
-                <!-- 19 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 19.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">Empowerment</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">방의 운영방식은 경영의 임파워먼트(권한 위임) 방식과 유사합니다. 방의 구성원인 여러분이 주인공이며, 주체입니다^^</p>
-                </div>
-                <!-- 20 -->
-                <div class="break-inside-avoid bg-gradient-to-br from-purple-400 to-indigo-400 dark:from-purple-800 dark:to-indigo-800 p-8 rounded-[2rem] shadow-md text-white transform rotate-1 hover:rotate-0 transition">
-                    <div class="text-purple-100 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-heart mr-3 text-sm"></i> 20.</div>
-                    <h3 class="font-cute text-3xl mb-4">아가페</h3>
-                    <p class="text-purple-50 text-2xl leading-relaxed font-hand">전 무교이지만, 상대방이 어떤 존재라도 이해하려 노력합니다. 여러분이 저를 조건 없이 대해 준다면, 저 역시 여러분을 절대적으로 사랑하겠습니다 >_<</p>
-                </div>
-                <!-- 21 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 21.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">Leader vs Reader</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">진정한 리더는 앞에서 사람을 이끄는 존재(Leader)가 아닌, 뒤에서 사람의 마음을 읽는 존재(Reader)라고 생각합니다.</p>
-                </div>
-                <!-- 22 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 22.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">대화와 성품</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">대화를 많이 한다고 뛰어난 것도, 적게 한다고 부족한 것도 아닙니다. 다만 본인이 어떤 성품을 지녔는지는 대화를 통해서만 알 수 있습니다.</p>
-                </div>
-                <!-- 23 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 23.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">미움 받을 용기</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">최선을 다해도 누군가는 당신을 미워합니다. 하지만 그 모습이 행복을 불러옵니다. 소수의 미움 때문에 올곧은 행동을 포기하지 마세요.</p>
-                </div>
-                <!-- 24 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 24.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">기대와 존중</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">기대가 없으면 실망도 없습니다. 처음에 갖는 기대는 환상에 가깝습니다. 상대방을 있는 그대로 존중해주도록 노력합시다!</p>
-                </div>
-                <!-- 25 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 25.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">따뜻한 배려</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">인프피가 어떤 충고나 차가운 말을 할 때는 몇 번을 참았다 뱉는 말일 거예요. 알 거 다 알면서 포근한 분들이니 따뜻하게 대해주세요.</p>
-                </div>
-                <!-- 26 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 26.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">겸손의 미덕</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">상대방이 편할수록 더 소중히 대하고, 가진 것이 많을수록 더 겸손해지시길 바래요. 자랑은 자만, 겸손은 존경과 비슷한 말입니다.</p>
-                </div>
-                <!-- 27 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 27.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">빛과 그림자</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">본인만 대단한 걸 모르는 존재가 되세요. 빛은 환하게 비쳐주는 사람들이 없으면 무용지물입니다. 본인이 뛰어난 이유는 타인이 존재하기 때문임을 명심하세요.</p>
-                </div>
-                <!-- 28 -->
-                <div class="break-inside-avoid bg-purple-100 dark:bg-slate-700 p-8 rounded-[2rem] shadow-inner border border-purple-200 dark:border-slate-600">
-                    <div class="text-purple-600 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-heart mr-3 text-sm"></i> 28.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-purple-900 dark:text-purple-200">한결같은 사람</h3>
-                    <p class="text-purple-800 dark:text-slate-300 text-2xl leading-relaxed font-hand">한 사람을 오랫동안 대하는 태도가 변함없는 것이 한결같음입니다. 설령 상대방이 위험한 사람이라도 내가 한결같으면, 그 사람을 아름다운 존재로 바꿀 수 있다고 믿어요.</p>
-                </div>
-                <!-- 29 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 29.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">내면의 호기심</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">"이 사람은 어떤 생각을 가졌을까?"라는 호기심을 가지세요. 타인의 진짜 내면은 오랜 만남 후에 드러납니다. 장기적인 내면의 호기심이 좋은 사람을 알아보는 열쇠입니다.</p>
-                </div>
-                <!-- 30 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 30.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">선한 신념</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">선한 신념은 유지하기 불편하고 많은 인내가 필요합니다. 하지만 꿋꿋이 유지하면 세상의 아름다움은 내 마음속에 있다는 걸 느끼게 될 거예요. 무너지고 싶을 때 천국방을 찾아주세요.</p>
-                </div>
-                <!-- 31 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 31.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">느림의 미학</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">인생은 달리기가 아닙니다. 느릴수록 더 넓게 보고 더 깊게 느낄 수 있습니다.</p>
-                </div>
-                <!-- 32 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 32.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">순간을 느끼기</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">사진으로 남기는 것보다 그 순간의 행복한 내 모습으로 만족하세요. 인생의 주체는 내가 되어야 합니다.</p>
-                </div>
-                <!-- 33 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 33.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">얕고 오래 보기</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">타인을 한 번에 알려고 하지 말고 천천히 알아가세요. 종이 한 장이 수백 장 쌓이면 뚫리지 않듯, 튼튼한 인연을 만들어가요.</p>
-                </div>
-                <!-- 34 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 34.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">존중</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">맞지 않는 사람을 억지로 바꾸려 하지 마세요. 있는 그대로 받아들이고 존중해주세요. 가장 좋은 건 스스로 깨닫게 해주는 사람이 되는 것입니다.</p>
-                </div>
-                <!-- 35 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 35.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">결단의 순간</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">중요한 순간에는 결단하세요. 결단은 진짜 좋은 사람을 가리는 과정입니다. 단 몇 명만 남더라도 그건 성공한 거예요.</p>
-                </div>
-                <!-- 36 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 36.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">사람이 제일 소중해</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">세상에서 가장 소중한 건 사람입니다. 관계에 지치고 포기하고 싶을 때, 그 낙담을 씻어줄 소중한 사람이 또 나타날 거예요.</p>
-                </div>
-                <!-- 37 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-crown mr-3 text-sm"></i> 37.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">인프피를 구하라</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">잔다르크처럼, 이 방이 공허한 인프피들의 마음을 구하는 쉼터가 되었으면 좋겠습니다. 머무는 동안 현실의 고통을 덜고 행복하세요!</p>
-                </div>
-                <!-- 38 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 38.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">사랑은 축복</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">선택한 단 한 사람을 외롭게 두지 마세요. 생이 망가지지 않을 정도로 후회 없는 사랑을 하세요. 둘만의 무대를 만드시길 바랍니다.</p>
-                </div>
-                <!-- 39 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 39.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">천국방과 나</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">천국방은 저의 내면이 고스란히 담긴 곳입니다. 저와 가까워지고 싶다면 이 방과 구성원들을 사랑해주세요. 그것이 저와 진정으로 가까워지는 길입니다.</p>
-                </div>
-                <!-- 40 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 40.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">울어도 돼요</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">혼자 우는 게 서럽다는 걸 알아요. 마음의 흙이 씻겨 내려갈 때까지 따뜻한 사람들이 함께 있어줄 거예요.</p>
-                </div>
-                <!-- 41 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 41.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">위대한 쇼맨</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">당신은 위대합니다. 아무에게도 꺼내지 못한 보물을 보여주세요. 조금만 용기 내주세요. 당신의 기쁨을 위하여.</p>
-                </div>
-                <!-- 42 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 42.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">뭣이 중헌디!</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">편견 없이 서로의 따뜻함을 나누는 것이 중요합니다. 바뀌려는 의지가 있다면 어느새 멋진 사람이 되어 있을 거예요. 천천히 그때를 기다립시다.</p>
-                </div>
-                <!-- 43 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 43.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">인생은 모험</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">안정적인 곳에 안주하지 말고 미지의 세상으로 뛰어드세요. 새로운 세상에서 주인이 되어 행복한 인생을 개척합시다.</p>
-                </div>
-                <!-- 44 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 44.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">아이를 지켜주세요</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">인프피는 아이처럼 순수한 존재입니다. 어른이 되어서도 아이로 살아가는 이들을 위한 이 공간이 무너지지 않게 존중하고 지켜주세요.</p>
-                </div>
-                <!-- 45 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 45.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">네 멋대로 해라</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">꿈이 멀어져 간다면 평판은 과감히 던져버리고 나아가세요. 멋있는 꿈을 위해 멋대로 하는 당신을 응원합니다.</p>
-                </div>
-                <!-- 46 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 46.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">자책하되 좌절 금지</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">자책을 통해 깨달음을 얻되, 깊은 수렁에 빠지지는 마세요. 잘못된 부분만 반성하고 성찰하여 변화하세요.</p>
-                </div>
-                <!-- 47 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 47.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">진실을 찾는 존재들</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">인프피는 맑은 물 같아서 진실을 찾으려 노력합니다. 그대들이 있기에 세상은 검어지지 않습니다.</p>
-                </div>
-                <!-- 48 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 48.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">결, 단결, 해결</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">진정한 해결은 결이 같은 사람들끼리 모였을 때 이루어집니다. 하얀 결을 가진 사람들이 모여 현실에서 못다 한 마음의 해결을 해나갑시다.</p>
-                </div>
-                <!-- 49 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 49.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">이상은 미래의 현실</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">건실한 이상은 불가능한 꿈이 아니라 미래에 다가올 일입니다. 이상을 포기하지 마세요. 그 이상이 여러분을 빛나게 할 것입니다.</p>
-                </div>
-                <!-- 50 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 50.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">살아있는 책</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">천국방은 여러분이 실시간으로 써 내려가는 살아있는 책입니다. 같은 시대를 살아가는 존재로서 지친 마음을 치유하세요.</p>
-                </div>
-                <!-- 51 -->
-                <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative group">
-                    <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> 51.</div>
-                    <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100">작은 나눔</h3>
-                    <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">아주 작은 일상이라도 대화를 통해 나눠주세요. 소소한 행복이 퍼져 모두가 미소 짓게 될 것입니다.</p>
-                </div>
-                 <!-- 52 -->
-                <div class="break-inside-avoid bg-gradient-to-br from-indigo-400 to-purple-500 dark:from-indigo-800 dark:to-purple-800 p-8 rounded-[2rem] shadow-md text-white transform rotate-1 hover:rotate-0 transition">
-                    <div class="text-purple-100 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-shield-alt mr-3 text-sm"></i> 52.</div>
-                    <h3 class="font-cute text-3xl mb-4">천국 파수꾼</h3>
-                    <p class="text-purple-50 text-2xl leading-relaxed font-hand">순수하고 상처 많은 사람들을 위한 세상을 지키고 싶습니다. 여러분도 누군가의 파수꾼이 되어 도움을 주고받는 공간이 되었으면 합니다. 도움의 핵심은 글입니다.</p>
-                </div>
-            </div>
+            <!-- JS로 내용이 채워질 공간 -->
+            <div id="comfortList" class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8"></div>
         </div>
     </section>
 
     <!-- 5. [기능 8번] 익명 대나무 숲 & 방명록 -->
     <section id="guestbook" class="py-24 bg-slate-100 dark:bg-slate-950 relative z-10 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- 탭 전환 버튼 -->
             <div class="flex justify-center mb-10 bg-white dark:bg-slate-800 inline-block mx-auto rounded-full p-1 shadow-sm">
                 <button id="tabPublic" class="px-6 py-2 rounded-full font-cute text-lg transition-all bg-purple-500 text-white shadow-md">💌 응원의 한마디</button>
                 <button id="tabSecret" class="px-6 py-2 rounded-full font-cute text-lg text-slate-500 dark:text-slate-400 hover:text-purple-500 transition-all">🎋 비밀 대나무 숲</button>
@@ -674,7 +464,6 @@
                 <p id="sectionDesc" class="text-slate-500 font-hand text-xl">서로에게 힘이 되는 예쁜 말들만 모아둡니다.</p>
             </div>
 
-            <!-- 입력 폼 -->
             <div class="bg-white dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm mb-12 border border-slate-200 dark:border-slate-800">
                 <form id="guestForm" class="flex flex-col gap-4">
                     <div class="flex flex-col md:flex-row gap-4">
@@ -690,18 +479,14 @@
                 </form>
             </div>
 
-            <!-- 정렬 필터 -->
             <div class="flex justify-end mb-4 gap-2">
                 <button id="sortLatest" class="px-4 py-2 bg-purple-500 text-white rounded-full font-cute text-sm shadow-md">최신순</button>
                 <button id="sortLikes" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full font-cute text-sm hover:bg-slate-300 transition">좋아요순</button>
             </div>
 
-            <!-- 게시글 리스트 -->
             <div class="bg-slate-200/50 dark:bg-slate-900/50 p-6 rounded-3xl border border-slate-300 dark:border-slate-800 backdrop-blur-sm">
                 <div id="messageList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scroll">
-                    <div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">
-                        데이터를 불러오는 중이에요... <i class="fas fa-spinner fa-spin"></i>
-                    </div>
+                    <div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">데이터를 불러오는 중이에요... <i class="fas fa-spinner fa-spin"></i></div>
                 </div>
             </div>
         </div>
@@ -734,33 +519,80 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // --- 공지 사항 데이터 (17~52번) ---
+        const notices = [
+            { id: 17, title: "신념이 흔들릴 때", icon: "⭐", content: "믿음이란 건 현실에서 무언가를 내어주면 내어줄수록 커집니다. 여러분은 제게 현실적인 것을 주지 않아 믿음이 흔들릴 수 있습니다. 그럴 때마다 저의 진심과 순수함을 기억해주세요. 가진 게 없어 현실에서 베풀지 못해 죄송합니다." },
+            { id: 18, title: "9와 4분의 3 승강장", icon: "🚂", content: "간단히 지나가는 곳 같지만, 방의 매력을 알지 못하면 오래 머물 수 없는 인프피를 위한 깊은 신뢰의 공간에 오신 걸 환영합니다!" },
+            { id: 19, title: "Empowerment", icon: "✨", content: "방의 운영방식은 경영의 임파워먼트(권한 위임) 방식과 유사합니다. 방의 구성원인 여러분이 주인공이며, 주체입니다^^" },
+            { id: 20, title: "아가페", icon: "💗", content: "전 무교이지만, 상대방이 어떤 존재라도 이해하려 노력합니다. 여러분이 저를 조건 없이 대해 준다면, 저 역시 여러분을 절대적으로 사랑하겠습니다 >_<" },
+            { id: 21, title: "Leader vs Reader", icon: "📖", content: "진정한 리더는 앞에서 사람을 이끄는 존재(Leader)가 아닌, 뒤에서 사람의 마음을 읽는 존재(Reader)라고 생각합니다." },
+            { id: 22, title: "대화와 성품", icon: "💬", content: "대화를 많이 한다고 뛰어난 것도, 적게 한다고 부족한 것도 아닙니다. 다만 본인이 어떤 성품을 지녔는지는 대화를 통해서만 알 수 있습니다." },
+            { id: 23, title: "미움 받을 용기", icon: "🛡️", content: "최선을 다해도 누군가는 당신을 미워합니다. 하지만 그 모습이 행복을 불러옵니다. 소수의 미움 때문에 올곧은 행동을 포기하지 마세요." },
+            { id: 24, title: "기대와 존중", icon: "🤝", content: "기대가 없으면 실망도 없습니다. 처음에 갖는 기대는 환상에 가깝습니다. 상대방을 있는 그대로 존중해주도록 노력합시다!" },
+            { id: 25, title: "따뜻한 배려", icon: "🧶", content: "인프피가 어떤 충고나 차가운 말을 할 때는 몇 번을 참았다 뱉는 말일 거예요. 알 거 다 알면서 포근한 분들이니 따뜻하게 대해주세요." },
+            { id: 26, title: "겸손의 미덕", icon: "🙇", content: "상대방이 편할수록 더 소중히 대하고, 가진 것이 많을수록 더 겸손해지시길 바래요. 자랑은 자만, 겸손은 존경과 비슷한 말입니다." },
+            { id: 27, title: "빛과 그림자", icon: "🌓", content: "본인만 대단한 걸 모르는 존재가 되세요. 빛은 환하게 비쳐주는 사람들이 없으면 무용지물입니다. 본인이 뛰어난 이유는 타인이 존재하기 때문임을 명심하세요." },
+            { id: 28, title: "한결같은 사람", icon: "🌲", content: "한 사람을 오랫동안 대하는 태도가 변함없는 것이 한결같음입니다. 설령 상대방이 위험한 사람이라도 내가 한결같으면, 그 사람을 아름다운 존재로 바꿀 수 있다고 믿어요." },
+            { id: 29, title: "내면의 호기심", icon: "🔍", content: "\"이 사람은 어떤 생각을 가졌을까?\"라는 호기심을 가지세요. 타인의 진짜 내면은 오랜 만남 후에 드러납니다. 장기적인 내면의 호기심이 좋은 사람을 알아보는 열쇠입니다." },
+            { id: 30, title: "선한 신념", icon: "🕯️", content: "선한 신념은 유지하기 불편하고 많은 인내가 필요합니다. 하지만 꿋꿋이 유지하면 세상의 아름다움은 내 마음속에 있다는 걸 느끼게 될 거예요. 무너지고 싶을 때 천국방을 찾아주세요." },
+            { id: 31, title: "느림의 미학", icon: "🐢", content: "인생은 달리기가 아닙니다. 느릴수록 더 넓게 보고 더 깊게 느낄 수 있습니다." },
+            { id: 32, title: "순간을 느껴라", icon: "📸", content: "사진으로 남기는 것보다 그 순간의 행복한 내 모습으로 만족하세요. 인생의 주체는 내가 되어야 합니다." },
+            { id: 33, title: "얕고 오래", icon: "🍵", content: "타인을 한 번에 알려고 하지 말고 천천히 알아가세요. 종이 한 장이 수백 장 쌓이면 뚫리지 않듯, 튼튼한 인연을 만들어가요." },
+            { id: 34, title: "존중", icon: "🙌", content: "맞지 않는 사람을 억지로 바꾸려 하지 마세요. 있는 그대로 받아들이고 존중해주세요. 가장 좋은 건 스스로 깨닫게 해주는 사람이 되는 것입니다." },
+            { id: 35, title: "결단의 순간", icon: "⚔️", content: "중요한 순간에는 결단하세요. 결단은 진짜 좋은 사람을 가리는 과정입니다. 단 몇 명만 남더라도 그건 성공한 거예요." },
+            { id: 36, title: "사람이 제일 소중해", icon: "💎", content: "세상에서 가장 소중한 건 사람입니다. 관계에 지치고 포기하고 싶을 때, 그 낙담을 씻어줄 소중한 사람이 또 나타날 거예요." },
+            { id: 37, title: "인프피를 구하라", icon: "🏳️", content: "잔다르크처럼, 이 방이 공허한 인프피들의 마음을 구하는 쉼터가 되었으면 좋겠습니다. 머무는 동안 현실의 고통을 덜고 행복하세요!" },
+            { id: 38, title: "사랑은 축복", icon: "💍", content: "선택한 단 한 사람을 외롭게 두지 마세요. 생이 망가지지 않을 정도로 후회 없는 사랑을 하세요. 둘만의 무대를 만드시길 바랍니다." },
+            { id: 39, title: "천국방과 나", icon: "🏠", content: "천국방은 저의 내면이 고스란히 담긴 곳입니다. 저와 가까워지고 싶다면 이 방과 구성원들을 사랑해주세요. 그것이 저와 진정으로 가까워지는 길입니다." },
+            { id: 40, title: "울어도 돼요", icon: "💧", content: "혼자 우는 게 서럽다는 걸 알아요. 마음의 흙이 씻겨 내려갈 때까지 따뜻한 사람들이 함께 있어줄 거예요." },
+            { id: 41, title: "위대한 쇼맨", icon: "🎪", content: "당신은 위대합니다. 아무에게도 꺼내지 못한 보물을 보여주세요. 조금만 용기 내주세요. 당신의 기쁨을 위하여." },
+            { id: 42, title: "뭣이 중헌디!", icon: "🔥", content: "편견 없이 서로의 따뜻함을 나누는 것이 중요합니다. 바뀌려는 의지가 있다면 어느새 멋진 사람이 되어 있을 거예요. 천천히 그때를 기다립시다." },
+            { id: 43, title: "인생은 모험", icon: "🗺️", content: "안정적인 곳에 안주하지 말고 미지의 세상으로 뛰어드세요. 새로운 세상에서 주인이 되어 행복한 인생을 개척합시다." },
+            { id: 44, title: "아이를 지켜주세요", icon: "🎈", content: "인프피는 아이처럼 순수한 존재입니다. 어른이 되어서도 아이로 살아가는 이들을 위한 이 공간이 무너지지 않게 존중하고 지켜주세요." },
+            { id: 45, title: "네 멋대로 해라", icon: "🎸", content: "꿈이 멀어져 간다면 평판은 과감히 던져버리고 나아가세요. 멋있는 꿈을 위해 멋대로 하는 당신을 응원합니다." },
+            { id: 46, title: "자책하되 좌절 금지", icon: "🛑", content: "자책을 통해 깨달음을 얻되, 깊은 수렁에 빠지지는 마세요. 잘못된 부분만 반성하고 성찰하여 변화하세요." },
+            { id: 47, title: "진실을 찾는 존재들", icon: "👁️", content: "인프피는 맑은 물 같아서 진실을 찾으려 노력합니다. 그대들이 있기에 세상은 검어지지 않습니다." },
+            { id: 48, title: "결, 단결, 해결", icon: "🧶", content: "진정한 해결은 결이 같은 사람들끼리 모였을 때 이루어집니다. 하얀 결을 가진 사람들이 모여 현실에서 못다 한 마음의 해결을 해나갑시다." },
+            { id: 49, title: "이상은 미래의 현실", icon: "🚀", content: "건실한 이상은 불가능한 꿈이 아니라 미래에 다가올 일입니다. 이상을 포기하지 마세요. 그 이상이 여러분을 빛나게 할 것입니다." },
+            { id: 50, title: "살아있는 책", icon: "📚", content: "천국방은 여러분이 실시간으로 써 내려가는 살아있는 책입니다. 같은 시대를 살아가는 존재로서 지친 마음을 치유하세요." },
+            { id: 51, title: "작은 나눔", icon: "🍰", content: "아주 작은 일상이라도 대화를 통해 나눠주세요. 소소한 행복이 퍼져 모두가 미소 짓게 될 것입니다." },
+            { id: 52, title: "천국 파수꾼", icon: "🛡️", content: "순수하고 상처 많은 사람들을 위한 세상을 지키고 싶습니다. 여러분도 누군가의 파수꾼이 되어 도움을 주고받는 공간이 되었으면 합니다. 도움의 핵심은 글입니다." }
+        ];
+
+        // 공지사항 렌더링 함수
+        function renderNotices() {
+            const list = document.getElementById('comfortList');
+            notices.forEach(item => {
+                const card = `
+                    <div class="break-inside-avoid bg-[#FDF4FF] dark:bg-slate-900 p-8 rounded-[2rem] shadow-sm border border-purple-100 dark:border-slate-700 hover:shadow-lg transition relative overflow-hidden group">
+                        <div class="tape bg-purple-200/50 dark:bg-purple-900/50 -rotate-2"></div>
+                        <div class="text-purple-400 dark:text-purple-300 font-cute text-2xl mb-3 flex items-center"><i class="fas fa-star mr-3 text-sm"></i> ${item.id}.</div>
+                        <h3 class="font-cute text-3xl mb-4 text-slate-800 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition">${item.title}</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-2xl leading-relaxed font-hand">${item.content}</p>
+                    </div>
+                `;
+                list.innerHTML += card;
+            });
+        }
+        renderNotices(); // 실행!
+
         // --- 유튜브 플레이어 로직 ---
         window.player = [];
         window.onYouTubeIframeAPIReady = function() {
-            // 빵장님이 고르신 영상 ID 적용!
             const videoIds = ['NWUnDp-iNkU', 'r9chqaNT340', 'ENGoSMNqQWs'];
             videoIds.forEach((id, index) => {
                 player[index] = new YT.Player(`player${index}`, {
-                    height: '0',
-                    width: '0',
-                    videoId: id,
+                    height: '1', width: '1', videoId: id, // 모바일 재생을 위해 1px로 설정
                     playerVars: { 'playsinline': 1 },
                     events: { 'onStateChange': onPlayerStateChange }
                 });
             });
         };
-
-        function onPlayerStateChange(event) {
-            // 상태 변화 감지 (필요 시 구현)
-        }
-
+        function onPlayerStateChange(event) {}
         window.toggleAudio = function(index) {
             const btn = document.getElementById(`btn${index}`);
             const card = document.getElementById(`playerCard${index}`);
-            const icon = btn.querySelector('i');
             const state = player[index].getPlayerState();
-
-            // 다른 오디오 끄기
             for(let i=0; i<3; i++) {
                 if(i !== index && player[i] && player[i].getPlayerState() === 1) {
                     player[i].pauseVideo();
@@ -768,34 +600,24 @@
                     document.getElementById(`playerCard${i}`).classList.remove('playing');
                 }
             }
-
-            if (state === 1) { // 재생 중이면 멈춤
+            if (state === 1) { 
                 player[index].pauseVideo();
                 btn.innerHTML = '<i class="fas fa-play ml-1"></i>';
                 card.classList.remove('playing');
-            } else { // 멈춤이면 재생
+            } else { 
                 player[index].playVideo();
                 btn.innerHTML = '<i class="fas fa-pause"></i>';
                 card.classList.add('playing');
             }
         };
 
-        // --- 기존 로직 (방명록, 식물 등) ---
-        let currentTab = 'public'; 
-        let currentSort = 'date';
-        let unsubscribe;
-        let totalMsgCount = 0; // 전체 메시지 수
-        let journalData = []; // 일지 데이터
+        // --- 기타 로직 ---
+        let currentTab = 'public'; let currentSort = 'date'; let unsubscribe;
+        let totalMsgCount = 0;
 
-        // 1. 오늘의 질문
-        const questions = [
-            "당신의 영혼은 무슨 색깔인가요?", "가장 그리워하는 시절은 언제인가요?",
-            "나를 가장 행복하게 하는 작은 순간은?", "듣고 싶은 위로의 말이 있나요?",
-            "당신은 어떤 계절을 닮았나요?"
-        ];
-        document.getElementById('dailyQuestion').innerText = questions[Math.floor(Math.random() * questions.length)];
+        const questionsList = ["당신의 영혼은 무슨 색깔인가요?", "가장 그리워하는 시절은 언제인가요?", "나를 가장 행복하게 하는 작은 순간은?", "듣고 싶은 위로의 말이 있나요?", "당신은 어떤 계절을 닮았나요?"];
+        document.getElementById('dailyQuestion').innerText = questionsList[Math.floor(Math.random() * questionsList.length)];
 
-        // 2. 탭 전환 (응원 vs 대나무숲)
         const tabPublic = document.getElementById('tabPublic');
         const tabSecret = document.getElementById('tabSecret');
         const nameInput = document.getElementById('nameInput');
@@ -823,7 +645,6 @@
             loadMessages(currentSort); 
         }
 
-        // 3. 방명록 쓰기
         const form = document.getElementById('guestForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -843,54 +664,34 @@
             } catch (error) { console.error(error); alert("오류가 발생했습니다."); }
         });
 
-        // 4. 방명록 읽기 (식물 성장 포함)
         function loadMessages(sortField) {
             const messageList = document.getElementById('messageList');
             const q = query(collection(db, "guestbook"), orderBy(sortField, "desc"), limit(100));
-
-            // 식물 성장 & 수확 버튼 관리
             const qAll = query(collection(db, "guestbook"));
-            onSnapshot(qAll, (snap) => {
-                totalMsgCount = snap.size;
-                updatePlant(totalMsgCount % 50); // 50개마다 리셋되는 효과 (시각적)
-            });
+            onSnapshot(qAll, (snap) => { totalMsgCount = snap.size; updatePlant(totalMsgCount % 50); });
 
             if (unsubscribe) unsubscribe();
-
             unsubscribe = onSnapshot(q, (snapshot) => {
                 messageList.innerHTML = "";
                 const filteredDocs = snapshot.docs.filter(doc => {
-                    const data = doc.data();
-                    const type = data.type || 'public'; 
-                    return type === currentTab;
+                    const data = doc.data(); const type = data.type || 'public'; return type === currentTab;
                 });
-
                 if (filteredDocs.length === 0) {
                     messageList.innerHTML = `<div class="text-center col-span-full text-slate-500 font-hand text-xl py-10">아직 글이 없어요. 첫 발자국을 남겨주세요! 🐾</div>`;
                     return;
                 }
-
                 const colors = ['bg-yellow-100', 'bg-pink-100', 'bg-blue-100', 'bg-green-100'];
                 const secretColors = ['bg-slate-700', 'bg-green-900', 'bg-slate-800', 'bg-green-800']; 
-
                 filteredDocs.forEach((doc) => {
-                    const data = doc.data();
-                    const docId = doc.id;
+                    const data = doc.data(); const docId = doc.id;
                     let colorClass = colors[data.color] || 'bg-yellow-100';
                     let textColor = 'text-slate-800';
-                    if (currentTab === 'secret') {
-                        colorClass = secretColors[data.color] || 'bg-slate-700';
-                        textColor = 'text-slate-200';
-                    }
+                    if (currentTab === 'secret') { colorClass = secretColors[data.color] || 'bg-slate-700'; textColor = 'text-slate-200'; }
                     const likeCount = data.likes || 0;
                     const isLiked = localStorage.getItem(`liked_${docId}`) ? 'liked' : '';
                     const heartIcon = isLiked ? 'fas' : 'far';
                     let dateStr = "";
-                    if(data.date) {
-                        const date = data.date.toDate();
-                        dateStr = `${date.getMonth()+1}/${date.getDate()}`;
-                    }
-
+                    if(data.date) { const date = data.date.toDate(); dateStr = `${date.getMonth()+1}/${date.getDate()}`; }
                     const card = `
                         <div class="post-it ${colorClass} ${textColor} p-4 h-40 flex flex-col justify-between rotate-1 rounded-xl hover:z-50 hover:scale-110 transition duration-200 relative group shadow-sm border border-black/5">
                             <div class="font-hand text-xl leading-snug overflow-y-auto custom-scroll mb-8">"${data.message}"</div>
@@ -898,123 +699,65 @@
                                 <div class="flex flex-col"><span class="font-cute text-xs truncate max-w-[80px]">${data.name}</span><span class="text-[10px] opacity-60 font-sans">${dateStr}</span></div>
                                 <button onclick="toggleLike('${docId}')" class="flex items-center gap-1 hover:bg-white/20 rounded-full px-2 py-1 transition ${isLiked} text-red-400"><i class="${heartIcon} fa-heart"></i> <span class="text-xs font-bold font-sans">${likeCount}</span></button>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                     messageList.innerHTML += card;
                 });
             });
         }
 
-        // 5. 식물 성장 및 수확
         function updatePlant(count) {
             const plantImg = document.getElementById('plantImage');
             const progress = document.getElementById('plantProgress');
             const levelText = document.getElementById('plantLevelText');
             const harvestBtn = document.getElementById('harvestBtn');
-            
-            let level = 1; let max = 10;
-            let imgSrc = "plant_1.jpg"; let name = "꿈꾸는 씨앗";
-
-            if (count >= 50) {
-                level = 4; max = 50; imgSrc = "plant_4.jpg"; name = "결실의 나무";
-                harvestBtn.classList.remove('hidden'); // 수확 버튼 보이기
-            } else {
-                harvestBtn.classList.add('hidden');
-                if (count >= 20) { level = 3; max = 50; imgSrc = "plant_3.jpg"; name = "자라나는 나무"; }
-                else if (count >= 5) { level = 2; max = 20; imgSrc = "plant_2.jpg"; name = "수줍은 새싹"; }
-            }
-
+            let level = 1; let max = 10; let imgSrc = "plant_1.jpg"; let name = "꿈꾸는 씨앗";
+            if (count >= 50) { level = 4; max = 50; imgSrc = "plant_4.jpg"; name = "결실의 나무"; harvestBtn.classList.remove('hidden'); } 
+            else { harvestBtn.classList.add('hidden'); if (count >= 20) { level = 3; max = 50; imgSrc = "plant_3.jpg"; name = "자라나는 나무"; } else if (count >= 5) { level = 2; max = 20; imgSrc = "plant_2.jpg"; name = "수줍은 새싹"; } }
             let percentage = Math.min((count / max) * 100, 100);
-            plantImg.src = imgSrc;
-            progress.style.width = `${percentage}%`;
-            levelText.innerText = `Level ${level}. ${name} (${count}/${max})`;
+            plantImg.src = imgSrc; progress.style.width = `${percentage}%`; levelText.innerText = `Level ${level}. ${name} (${count}/${max})`;
         }
 
-        // 정원 일지 (수확 기능)
         window.harvestGarden = async () => {
             if(!confirm("정말 수확하시겠습니까? 나무가 다시 씨앗으로 돌아갑니다.")) return;
-            
             const seasonName = prompt("이 계절에 이름을 붙여주세요 (예: 2024년 첫 봄)", "기록된 계절");
             if(!seasonName) return;
-
-            try {
-                await addDoc(collection(db, "journals"), {
-                    seasonName: seasonName,
-                    count: totalMsgCount,
-                    date: serverTimestamp()
-                });
-                alert("수확이 완료되었습니다! 일지에 기록되었어요. 📖");
-                // 실제 리셋 로직은 복잡하므로 여기선 알림만 주고, 시각적으로는 50개 단위로 자동 리셋됨
-                location.reload(); 
-            } catch(e) { console.error(e); }
+            try { await addDoc(collection(db, "journals"), { seasonName: seasonName, count: totalMsgCount, date: serverTimestamp() }); alert("수확이 완료되었습니다! 일지에 기록되었어요. 📖"); location.reload(); } catch(e) { console.error(e); }
         };
 
-        // 정원 일지 열기/닫기
-        window.openJournal = () => {
-            document.getElementById('journalModal').classList.remove('hidden');
-            loadJournals();
-        };
+        window.openJournal = () => { document.getElementById('journalModal').classList.remove('hidden'); loadJournals(); };
         window.closeJournal = () => document.getElementById('journalModal').classList.add('hidden');
-
         function loadJournals() {
             const journalList = document.getElementById('journalList');
             const q = query(collection(db, "journals"), orderBy("date", "desc"));
-            
             onSnapshot(q, (snapshot) => {
                 journalList.innerHTML = "";
-                if(snapshot.empty) {
-                    journalList.innerHTML = `<div class="text-center text-slate-500 py-4 font-hand text-xl">아직 기록된 계절이 없어요.</div>`;
-                    return;
-                }
+                if(snapshot.empty) { journalList.innerHTML = `<div class="text-center text-slate-500 py-4 font-hand text-xl">아직 기록된 계절이 없어요.</div>`; return; }
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    let dateStr = "";
-                    if(data.date) {
-                        const date = data.date.toDate();
-                        dateStr = `${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}`;
-                    }
-                    journalList.innerHTML += `
-                        <div class="bg-purple-50 dark:bg-slate-700 p-4 rounded-xl flex justify-between items-center">
-                            <div>
-                                <h4 class="font-cute text-lg text-slate-800 dark:text-white">${data.seasonName}</h4>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">${dateStr} 수확함</p>
-                            </div>
-                            <div class="text-2xl">🍎</div>
-                        </div>
-                    `;
+                    let dateStr = ""; if(data.date) { const date = data.date.toDate(); dateStr = `${date.getFullYear()}.${date.getMonth()+1}.${date.getDate()}`; }
+                    journalList.innerHTML += `<div class="bg-purple-50 dark:bg-slate-700 p-4 rounded-xl flex justify-between items-center"><div><h4 class="font-cute text-lg text-slate-800 dark:text-white">${data.seasonName}</h4><p class="text-xs text-slate-500 dark:text-slate-400">${dateStr} 수확함</p></div><div class="text-2xl">🍎</div></div>`;
                 });
             });
         }
 
-        // 좋아요 토글
         window.toggleLike = async (docId) => {
             if (localStorage.getItem(`liked_${docId}`)) { alert("이미 마음을 표현했어요! 💜"); return; }
-            try {
-                const docRef = doc(db, "guestbook", docId);
-                await updateDoc(docRef, { likes: increment(1) });
-                localStorage.setItem(`liked_${docId}`, "true");
-            } catch (error) { console.error(error); }
+            try { const docRef = doc(db, "guestbook", docId); await updateDoc(docRef, { likes: increment(1) }); localStorage.setItem(`liked_${docId}`, "true"); } catch (error) { console.error(error); }
         };
 
-        // 정렬
         document.getElementById('sortLatest').addEventListener('click', () => { currentSort = 'date'; loadMessages('date'); });
         document.getElementById('sortLikes').addEventListener('click', () => { currentSort = 'likes'; loadMessages('likes'); });
 
-        // 테마 & 모바일 메뉴
         const themeBtnDesktop = document.getElementById('themeBtnDesktop');
         const themeBtnMobile = document.getElementById('themeBtnMobile');
         const html = document.documentElement;
-        function toggleTheme() {
-            html.classList.toggle('dark');
-            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-        }
+        function toggleTheme() { html.classList.toggle('dark'); localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light'; }
         themeBtnDesktop.addEventListener('click', toggleTheme);
         if(themeBtnMobile) themeBtnMobile.addEventListener('click', toggleTheme);
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-        // 초기 실행
         loadMessages('date');
     </script>
 </body>
